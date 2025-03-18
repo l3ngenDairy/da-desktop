@@ -3,7 +3,8 @@
 
   inputs = {
     # Nix package sources
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+                #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";            
     flake-utils.url = "github:numtide/flake-utils";
 
     # Home Manager

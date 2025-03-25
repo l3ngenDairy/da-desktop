@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Webcam module for NixOS
   options.custom.webcam = {
     enable = lib.mkEnableOption "Enable webcam support";
   };
@@ -17,13 +16,7 @@
       guvcview    # Another webcam viewer and test tool
     ];
 
-    # Additional security and access configuration
-    security.wrappers = {
-      # Ensure proper permissions for video devices
-      v4l-ctl = {
-        source = "${pkgs.v4l-utils}/bin/v4l2-ctl";
-        capabilities = "cap_sys_admin+ep";
-      };
-    };
+    # Ensure proper group access for video devices
+    users.groups.video = {};
   };
 }

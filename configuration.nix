@@ -9,6 +9,7 @@
     ];
   # Install firefox.
   programs.firefox.enable = true;
+  custom.webcam.enable = true;      
 
   hardware.enableAllFirmware = true;
   system.stateVersion = "24.11";

@@ -21,7 +21,7 @@
                 # ./xdg-portal.nix
     ./microcode.nix
     ./transmission.nix
-
+    ./webcam.nix
     ./minecraft.nix            
 
 

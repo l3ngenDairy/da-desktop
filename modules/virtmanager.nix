@@ -14,14 +14,25 @@
       ovmf.enable = true;
       runAsRoot = true;
     };
-    
-    # Ensure the default network is enabled and auto-started
-    networks = {
-      default = {
-        enable = true;
-        autoStart = true;
-      };
+  };
+  
+  # Network config through system service
+  systemd.services.libvirtd-network-default = {
+    enable = true;
+    description = "Libvirt Default Network Auto-Start";
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "libvirtd.service" ];
+    after = [ "libvirtd.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = "yes";
     };
+    script = ''
+      if ! ${pkgs.libvirt}/bin/virsh net-info default | grep -q "Active:.*yes"; then
+        ${pkgs.libvirt}/bin/virsh net-start default
+      fi
+      ${pkgs.libvirt}/bin/virsh net-autostart default
+    '';
   };
   
   programs.virt-manager = {
